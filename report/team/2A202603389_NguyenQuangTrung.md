@@ -20,13 +20,13 @@
 - **A2:** Viết hàm `mo_hinh(runs, reqs, ...)` đọc `logix_requests.csv` với `keep_default_na=False`, tính tử số trên mọi lần chạy kể cả lần lỗi và mẫu số chỉ đếm `ket_qua == 'thanh_cong'`. Kết quả: tổng chi phí `4.373.585 đ`, `978` việc thành công, **CPS = `4.472 đ` [simulated]** (gấp `16,3×` hoá đơn token + tool/yêu cầu `274,7 đ`); chi phí cả hệ thống/yêu cầu là `5.865 đ` (`0,49×` mức `12.000 đ`) [simulated].
 - **A3 & A4:** Tách chi phí theo 4 loại (`noi_dia` `2.696 đ`, `hang_nang` `8.221 đ`, `quoc_te` `22.515 đ`, `doi_tac` `10.215 đ` [simulated]), lập bảng tỉ lệ `ok` theo `attempt` (chứng minh `quoc_te` giảm từ `30,0%` → `11,4%` → `2,2%`) và cộng chi phí cố định `40 triệu đ/tháng` cho phạm vi `noi_dia + hang_nang` (`4.599 đ` ở 45.000 yc/tháng; `5.784 đ` ở 22.500 yc/tháng [simulated]).
 - **B1–B4:** Chạy đủ 9 kịch bản độ nhạy (đạt kiểm tra tính tuyến tính), kịch bản cặp (`6.543 đ`, `+46,3%` [simulated]), xếp hạng top 3 yếu tố (`1. Số ca làm lại +51,8% · 2. Tỉ lệ xem lại +40,7% · 3. Lương nhân viên +23,1%`), so sánh chi phí cả hệ thống theo giới hạn 1/2/3 lần (giới hạn **2 lần** rẻ nhất cho công ty: `6.901.220 đ` [simulated]), và kịch bản xem lại 100% (`11.743 đ = 0,98×` với 9 phút làm lại; `12.415 đ = 1,03×` với trung bình thực tế `15,3 phút` [simulated]; ngưỡng hoà vốn xem lại `≤ 5,12` và `≤ 4,80 phút/lần`).
-- **Duyệt chéo Gate 2a (`report/team/phieu_cham.md`):** *(Bổ sung sau phiên 17:00 với bài thật của nhóm `n + 1`)*.
+- **Duyệt chéo Gate 2a (`report/team/phieu_cham.md`):** Trực tiếp rà soát repo và hồ sơ của nhóm **abc123 (`K5-L3A-DAY13-abc123-LaunchEconomics`)**, đối chiếu chéo giữa `ho_so_launch_v0.md`, `pilot_plan.yaml`, `bang_chi_phi.md` với code thực tế trong `src/lab13.py` của nhóm bạn; chấm điểm công tâm kèm bằng chứng số liệu (**25/30 điểm**: `10 + 10 + 5`, quyết định **Go có điều kiện**) và đặt câu hỏi phản biện về phần tính A4/B4 (15,3 phút)/chi phí cả hệ thống trong phạm vi pilot (`4.131 đ/YC`).
 
 ## 4. Bằng chứng
 
-- File code: `src/lab13.py` (chạy `cd src && .\.venv\Scripts\python.exe lab13.py` in `Ba phép thử đáp án biết trước: ĐẠT` và đầy đủ bảng A1–A4, B1–B4).
+- File code: `src/lab13.py` (chạy `cd src && .\.venv\Scripts\python.exe lab13.py` in `Ba phép thử đáp án biết trước: ĐẠT` và đầy đủ bảng A1–A4, B1–B4, D1).
 - File nhóm đã cập nhật thông tin thành viên: `TEAM.md`.
-- File phiếu chấm chéo Gate 2a: `report/team/phieu_cham.md` *(sẽ cập nhật lúc 17:00)*.
+- File phiếu chấm chéo Gate 2a đã hoàn thiện: `report/team/phieu_cham.md` (chấm nhóm `abc123` đạt `25/30`).
 
 ## 5. Công cụ AI đã dùng
 

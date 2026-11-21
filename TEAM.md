@@ -53,7 +53,7 @@ Sao chép mục dưới đây cho từng thành viên.
 
 - `src/lab13.py` (chạy đạt `Ba phép thử đáp án biết trước: ĐẠT` và xuất đủ bảng A1–A4, B1–B4)
 - `report/team/2A202603389_NguyenQuangTrung.md`
-- `report/team/phieu_cham.md` *(cập nhật sau phiên duyệt chéo 17:00)*
+- `report/team/phieu_cham.md` (hoàn thành chấm chéo hội đồng Gate 2a cho nhóm `abc123`: `25/30` điểm)
 
 ## LeVanHoang-2A202603357
 
