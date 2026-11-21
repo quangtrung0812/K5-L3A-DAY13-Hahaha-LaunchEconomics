@@ -63,7 +63,9 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Đóng góp cụ thể
 
-- *(Cập nhật khi hoàn thành PR Role 2)*
+- Kiểm chứng độc lập toàn bộ số liệu CP1–CP2 trên `src/logix_runs.csv` và `src/logix_requests.csv` (`keep_default_na=False`), đối chiếu chéo với Role 1 và hoàn thiện `report/team/bang_chi_phi.md` (bảng A1–A4, B1–B4, đủ nhãn `simulated`, câu trả lời <= 3 dòng có số).
+- Tính 5 câu cỡ mẫu D1 (`a–e`), lực kiểm định đánh đổi ở mức +5 điểm (`power ~0,64`), trả lời 5 câu tách tác động D2, tính tỉ lệ `mo_lai_trong_7_ngay` hiện tại (`4,25%` toàn mẫu; `3,97%` phạm vi) và hoàn thiện `report/team/pilot_plan.yaml` (3 luật dừng 4 vế `NẾU – TRONG – THÌ – KHÔNG THÌ`).
+- Đổi vai viết code sau giải lao: bổ sung hàm `co_mau_hai_ti_le` và `in_nhiem_vu_d` (`# TODO CP4`) vào `src/lab13.py`; hoàn thiện báo cáo cá nhân `report/team/2A202603357_LeVanHoang.md`.
 
 ### Bằng chứng
 

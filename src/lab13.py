@@ -231,12 +231,89 @@ def in_nhiem_vu_b(runs, reqs):
               f'Hoà vốn xem lại <= {hoa_von_phut:.2f} phút/lần')
 
 
+# ---------- Nhiệm vụ D1 · Cỡ mẫu kế hoạch Pilot (CP4 — Role 2) ----------
+def co_mau_hai_ti_le(p1, p2, alpha=0.05, power=0.80):
+    """Cỡ mẫu mỗi nhóm khi so sánh hai tỉ lệ độc lập (công thức chuẩn NormalDist)."""
+    from statistics import NormalDist
+    nd = NormalDist()
+    za = nd.inv_cdf(1.0 - alpha / 2.0)
+    zb = nd.inv_cdf(power)
+    pb = (p1 + p2) / 2.0
+    tu_so = za * math.sqrt(2.0 * pb * (1.0 - pb)) + zb * math.sqrt(p1 * (1.0 - p1) + p2 * (1.0 - p2))
+    return math.ceil((tu_so ** 2) / ((p2 - p1) ** 2))
+
+
+def in_nhiem_vu_d(reqs):
+    """In kết quả 5 câu cỡ mẫu D1 (a-e), power ở mức 5 điểm khi n=859, và tỉ lệ mở lại 7 ngày."""
+    from statistics import NormalDist
+    p1 = 0.70
+    p2_5pt = 0.75
+    p2_6pt = 0.76
+    alpha = 0.05
+    power = 0.80
+    icc = 0.02
+
+    # a) Chia theo yêu cầu (+5 điểm)
+    n_a = co_mau_hai_ti_le(p1, p2_5pt, alpha=alpha, power=power)
+
+    # b) Chia theo nhân viên, m = 75
+    m_b = 75
+    de_b = 1.0 + (m_b - 1) * icc
+    n_b = math.ceil(n_a * de_b)
+    nv_b = math.ceil(n_b / m_b)
+
+    # c) 20 nhân viên mỗi nhóm -> giới hạn c / ICC
+    c_staff = 20
+    n_eff_max_c = int(round(c_staff / icc))
+
+    # d) 6 depot mỗi nhóm -> giới hạn c / ICC
+    c_depot = 6
+    n_eff_max_d = int(round(c_depot / icc))
+
+    # e) Mức chênh 6 điểm (0.70 -> 0.76, cần 859/nhóm), 20 nhân viên mỗi nhóm
+    n_6pt = co_mau_hai_ti_le(p1, p2_6pt, alpha=alpha, power=power)
+    m_e = math.ceil(((1.0 - icc) * n_6pt) / (c_staff - icc * n_6pt))
+    de_e = 1.0 + (m_e - 1) * icc
+    n_eff_e = (c_staff * m_e) / de_e
+
+    # Power thực tế ở mức +5 điểm nếu dùng n_per_arm = 859
+    nd = NormalDist()
+    za = nd.inv_cdf(1.0 - alpha / 2.0)
+    pb_5 = (p1 + p2_5pt) / 2.0
+    z_beta_2p = (abs(p2_5pt - p1) * math.sqrt(n_6pt) - za * math.sqrt(2.0 * pb_5 * (1.0 - pb_5))) / math.sqrt(
+        p1 * (1.0 - p1) + p2_5pt * (1.0 - p2_5pt)
+    )
+    power_5pt_2p = nd.cdf(z_beta_2p)
+    try:
+        from statsmodels.stats.proportion import proportion_effectsize
+        from statsmodels.stats.power import NormalIndPower
+        h_5pt = abs(proportion_effectsize(p2_5pt, p1))
+        power_5pt_sm = NormalIndPower().power(effect_size=h_5pt, nobs1=n_6pt, alpha=alpha, ratio=1.0)
+    except ImportError:
+        h_5pt = 2.0 * (math.asin(math.sqrt(p2_5pt)) - math.asin(math.sqrt(p1)))
+        power_5pt_sm = nd.cdf(abs(h_5pt) * math.sqrt(n_6pt / 2.0) - za)
+
+    # Tỉ lệ mo_lai_trong_7_ngay hiện tại
+    mo_lai_all_cnt = int((reqs['mo_lai_trong_7_ngay'] == 1).sum())
+    mo_lai_all_pct = reqs['mo_lai_trong_7_ngay'].mean() * 100.0
+    pv_reqs = reqs[reqs['loai'].isin(['noi_dia', 'hang_nang'])]
+    mo_lai_pv_cnt = int((pv_reqs['mo_lai_trong_7_ngay'] == 1).sum())
+    mo_lai_pv_pct = pv_reqs['mo_lai_trong_7_ngay'].mean() * 100.0
+
+    print('\n=== D1 · Cỡ mẫu kế hoạch Pilot (baseline=0.70, alpha=0.05, power=0.80, ICC=0.02) ===')
+    print(f'  a) Chia theo yêu cầu (+5 điểm, 0.70 -> 0.75) : {n_a:,} yêu cầu/nhóm (tổng {2 * n_a:,} yêu cầu)')
+    print(f'  b) Theo nhân viên (m = 75, ICC = 0.02)       : DE = {de_b:.2f} · cần {n_b:,} YC/nhóm -> {nv_b} nhân viên/nhóm (tổng {2 * nv_b} > 40: không đủ người)')
+    print(f'  c) 20 nhân viên mỗi nhóm (c / ICC)           : tối đa < {n_eff_max_c:,} YC hiệu dụng/nhóm (< {n_a:,}: không đạt mốc +5 điểm)')
+    print(f'  d) 6 depot mỗi nhóm (c / ICC)                : tối đa < {n_eff_max_d:,} YC hiệu dụng/nhóm (< {n_a:,} và chỉ có 6 cụm < 20)')
+    print(f'  e) Mức chênh +6 điểm (n = {n_6pt}/nhóm, 20 NV/nhóm): cần m >= {m_e} YC/nhân viên (DE = {de_e:.2f}, n_hiệu_dụng = {n_eff_e:.1f})')
+    print(f'  - Đánh đổi khi n = {n_6pt} nhưng tác động thật là +5 điểm: power giảm còn ~{power_5pt_2p:.2f} (2 tỉ lệ = {power_5pt_2p:.4f} · Cohen-h = {power_5pt_sm:.4f})')
+    print(f'  - Tỉ lệ mo_lai_trong_7_ngay hiện tại         : toàn mẫu = {mo_lai_all_pct:.2f}% ({mo_lai_all_cnt}/{len(reqs)}) · phạm vi (noi_dia+hang_nang) = {mo_lai_pv_pct:.2f}% ({mo_lai_pv_cnt}/{len(pv_reqs)})')
+
+
 if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
     kiem_tra_dap_an_biet_truoc()
     in_nhiem_vu_a(runs, reqs)
     in_nhiem_vu_b(runs, reqs)
-    # TODO CP4 · Nhiệm vụ D: cỡ mẫu (Role 2 bổ sung sau khi merge PR #1).
-    #   from statsmodels.stats.proportion import proportion_effectsize
-    #   from statsmodels.stats.power import NormalIndPower
+    in_nhiem_vu_d(reqs)
