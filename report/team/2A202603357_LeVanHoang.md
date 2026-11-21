@@ -6,7 +6,7 @@ Copy file này và đổi tên theo quy tắc `MSSV_HoTen.md`. Giữ nguyên fil
 
 - Họ tên: Lê Văn Hoàng
 - MSSV: `2A202603357`
-- Email: `hoanglv2k4@gmail.com`
+- Email: `26ai.hoanglv5@vinuni.edu.vn`
 - GitHub: `hoanglv2k9`
 - Vai trong nhóm (người viết code, người kiểm số, người gắn nhãn 1, người gắn nhãn 2 kiêm giữ hồ sơ): **Người kiểm số** (kiêm phụ trách Nhiệm vụ D — `pilot_plan.yaml` và đổi người viết code phần CP4 sau giờ giải lao)
 
@@ -34,8 +34,9 @@ Copy file này và đổi tên theo quy tắc `MSSV_HoTen.md`. Giữ nguyên fil
 
 ## 4. Bằng chứng
 
-- File hồ sơ đã hoàn thiện trên nhánh `LeVanHoang-2A202603357`:
-  - `report/team/bang_chi_phi.md` (đầy đủ A1–A4, B1–B4, đủ nhãn `simulated`).
+- File hồ sơ & code đã hoàn thiện trên nhánh `LeVanHoang-2A202603357`:
+  - `src/lab13.py` (bổ sung hàm `co_mau_hai_ti_le` và `in_nhiem_vu_d` cho `# TODO CP4` — chạy thông suốt từ đầu đến cuối).
+  - `report/team/bang_chi_phi.md` (đầy đủ A1–A4, B1–B4, đối chiếu khớp 100% với output `src/lab13.py`, đủ nhãn `simulated`).
   - `report/team/pilot_plan.yaml` (đọc hợp lệ bằng `yaml.safe_load`, 0 dấu `?` ngoài comment, 3 luật dừng 4 vế).
   - `report/team/2A202603357_LeVanHoang.md` (báo cáo cá nhân).
 
