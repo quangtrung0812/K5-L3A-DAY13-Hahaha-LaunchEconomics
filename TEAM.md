@@ -79,7 +79,9 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Đóng góp cụ thể
 
-- *(Cập nhật khi hoàn thành PR Role 3)*
+- Thực hiện gắn nhãn độc lập 20 ca lỗi CP3 theo 5 loại Google PAIR, đối chiếu với Người gắn nhãn 2 đạt tỉ lệ đồng thuận `18/20 = 90%` ($\ge 80\%$), ghi quy tắc phân biệt cho 2 ca không trùng (Ca 9, Ca 13) và hoàn thiện bảng khắc phục 5 ca đại diện trong `report/team/bang_loi.md`.
+- Tính thử 3 chỉ số E1 trên `1.200` yêu cầu (`82,83%` chỉ số chính; `27,12%` bỏ qua gợi ý; `4,25%` mở lại 7 ngày), đề xuất 2 chỉ số bổ sung, thiết kế `10` event đều có `trace_id` kèm kiểm tra chéo và hoàn thiện bảng rủi ro kinh tế E2 dẫn số trực tiếp từ bảng độ nhạy (có nhãn `simulated`) trong `report/team/chi_so.md`.
+- Hoàn thiện báo cáo cá nhân `report/team/2A202603367_NguyenDucTrong.md`.
 
 ### Bằng chứng
 

@@ -1,15 +1,12 @@
-# Báo cáo cá nhân — HoVaTen-MSSV
-
-Copy file này và đổi tên theo quy tắc `MSSV_HoTen.md`. Giữ nguyên file mẫu.
-
-Ví dụ: `20241234_NguyenVanAn.md`.
+# Báo cáo cá nhân — NguyenDucTrong-2A202603367
 
 ## 1. Thông tin thành viên
 
-- Họ tên:
-- MSSV:
-- Email:
-- Vai trong nhóm (người viết code, người kiểm số, người gắn nhãn 1, người gắn nhãn 2 kiêm giữ hồ sơ): Người gắn nhãn 1, đồng thời phụ trách đặc tả chỉ số và event cho CP5 E1–E2.
+- Họ tên: Nguyễn Đức Trọng
+- MSSV: `2A202603367`
+- Email: `26ai.trongnd3@vinuni.edu.vn`
+- GitHub: `trong1004`
+- Vai trong nhóm (người viết code, người kiểm số, người gắn nhãn 1, người gắn nhãn 2 kiêm giữ hồ sơ): **Người gắn nhãn 1 (Role 3)**, đồng thời phụ trách đặc tả chỉ số, danh sách event và rủi ro kinh tế cho CP5 E1–E2.
 
 ## 2. Phần việc phụ trách
 
@@ -22,8 +19,8 @@ CP3 – Phân loại lỗi
 - Chuẩn hóa mô tả và câu hỏi phân biệt cho 5 nhóm lỗi, theo nguyên tắc gắn nhãn theo nguyên nhân gốc, không gắn theo nơi cần sửa.
 - Chuẩn bị bảng 20 ca với hai cột nhãn độc lập dành cho người gắn nhãn 1 và Role 4; giữ riêng phần nhãn AI tham khảo để hỗ trợ đối chiếu, không dùng thay nhãn độc lập.
 - Bổ sung khung tính đồng thuận: số ca hai người gắn cùng nhãn / 20; ngưỡng mục tiêu tối thiểu 80% (16/20). Các ca bất đồng cần có nhãn thống nhất và một câu quy tắc phân biệt.
-- Đề xuất cách phát hiện và khắc phục cho đủ 5 nhóm. Ví dụ: cảnh báo sai lệch số tiền giữa agent.run.completed và refund.ledger.written; kiểm tra yêu cầu ngoài phạm vi chưa được request.handoff; kiểm toán sai lệch hoàn tiền qua refund.audit.completed.
-- Trạng thái: đã chuẩn bị khung và nhãn AI tham khảo; chưa thể kết luận tỷ lệ đồng thuận hoặc chốt 5 ca đại diện trước khi có đủ hai bộ nhãn độc lập và kết quả thảo luận.
+- Đề xuất cách phát hiện đo được (event, ngưỡng, tần suất) và cách khắc phục kèm 1 vai trò phụ trách cho đủ 5 nhóm lỗi đại diện (Ca 9, Ca 7, Ca 18, Ca 4, Ca 17).
+- Kết quả thực hiện: Hoàn thành gắn nhãn độc lập 20 ca với Người gắn nhãn 2 (Trần Thanh Tùng), đạt tỉ lệ đồng thuận **18/20 = 90%** ($\ge 80\%$), thống nhất quy tắc phân biệt cho 2 ca không trùng (Ca 9 và Ca 13) và hoàn thiện bảng khắc phục 5 ca trong `report/team/bang_loi.md`.
 CP5 E1 – Chỉ số thử nghiệm
 Tính từ toàn bộ 1.200 dòng trong logix_requests.csv, đọc với keep_default_na=False:
 Nhóm	Chỉ số	Kết quả tính thử
@@ -35,11 +32,10 @@ Dùng bổ sung	Tỷ lệ chấp nhận nguyên trạng gợi ý (giu) trong cá
 
 Các số trên được diễn đạt là “chỉ số trong đợt chạy thử”. Vì dữ liệu không có nhóm đối chứng, không kết luận trợ lý đã gây ra mức tăng hoặc cải thiện. Chỉ số sai lệch số tiền hoàn qua kiểm toán được đề xuất nhưng chưa tính được từ CSV hiện có vì thiếu expected_amount và actual_amount.
 
-Thiết kế danh sách event gồm request.created, agent.run.started, agent.run.completed, review.completed, refund.rework.created, refund.ledger.written, request.handoff, request.closed, request.reopened và refund.audit.completed. Mỗi event đều có trace_id để nối với trace; chỉ số được đối chiếu với event tương ứng.
+Thiết kế danh sách 10 event gồm request.created, agent.run.started, agent.run.completed, review.completed, refund.rework.created, refund.ledger.written, request.handoff, request.closed, request.reopened và refund.audit.completed. Mỗi event đều có trace_id để nối với trace; chỉ số được đối chiếu chéo đầy đủ với event tương ứng.
 CP5 E2 – Rủi ro kinh tế
-- Xác định ba nhóm rủi ro cần theo dõi: giá token tăng; thời gian xem lại/làm lại tăng; chạy lại nhiều lần nhưng không cải thiện tỷ lệ thành công tương ứng.
-- Gắn từng rủi ro với tín hiệu đo được như chi phí token/request, CPS, tỷ lệ sua/`bo`, phút xem lại, số lần attempt và tỷ lệ lỗi theo attempt.
-- Đề xuất hành động kiểm soát và vai trò phụ trách: Kỹ sư AI, Trưởng vận hành CS. Tác động định lượng từ B1/B4/A4 cần lấy từ kết quả đã xác nhận của thành viên phụ trách; không tự suy diễn số liệu.
+- Tổng hợp 3 dòng rủi ro kinh tế vào `report/team/chi_so.md` bằng số liệu đã kiểm chứng từ bảng độ nhạy (`bang_chi_phi.md`): (1) Số ca làm lại tăng gấp đôi làm CPS tăng `+51,8%` lên `6.787 đ/việc` (`simulated`); (2) Kịch bản phải xem lại 100% kéo dài đẩy CPS phạm vi lên `11.743 đ (0,98×)` với 9 phút làm lại và `12.415 đ (1,03×)` với `15,3` phút làm lại thực tế (`simulated`), ngưỡng hoà vốn xem lại `≤ 4,8–5,1` phút/ca; (3) Khối lượng giảm một nửa làm chi phí cố định tăng lên `2.370 đ/việc` (`5.784 đ = 0,48×`, `simulated`) và giá token gấp đôi làm CPS tăng `+5,6%` lên `4.723 đ` (`simulated`).
+- Gắn từng rủi ro với dấu hiệu theo dõi đo được, hành động kiểm soát cụ thể và 1 vai trò phụ trách (PM trợ lý hoàn phí, Trưởng nhóm CSKH, Giám đốc vận hành LogiX-VN).
 
 ## 4. Bằng chứng
 
@@ -59,5 +55,4 @@ Công cụ nào, dùng vào việc gì, bạn tự kiểm tra kết quả ra sao
 
 ## 6. Tự đánh giá
 
-- Đã hoàn thành: chuẩn hóa khung phân loại lỗi; chuẩn bị bảng 20 ca và nhãn AI tham khảo; tính và kiểm tra lại các chỉ số E1; thiết kế event có trace_id; xác định các rủi ro kinh tế và tín hiệu giám sát cần có.
-- Tự đánh giá chung: phần đặc tả chỉ số và khung hồ sơ lỗi đã có cơ sở kiểm tra được. CP3 chưa thể xem là hoàn tất cho đến khi có hai bộ nhãn độc lập và kết quả agreement; E2 cần cập nhật số liệu kinh tế đã được nhóm xác nhận.
+- Đã hoàn thành đầy đủ nhiệm vụ của Người gắn nhãn 1 (Role 3): gắn nhãn độc lập 20 ca lỗi CP3 đạt đồng thuận `18/20 = 90%`, hoàn thiện bảng khắc phục 5 ca đại diện trong `report/team/bang_loi.md`; tính chính xác 3 chỉ số E1, thiết kế 10 event có `trace_id` kèm kiểm tra chéo và hoàn thiện bảng rủi ro kinh tế E2 có đầy đủ con số từ bảng độ nhạy (nhãn `simulated`) trong `report/team/chi_so.md`.
