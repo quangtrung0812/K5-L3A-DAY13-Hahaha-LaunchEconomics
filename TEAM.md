@@ -93,7 +93,9 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Đóng góp cụ thể
 
-- *(Cập nhật khi hoàn thành PR Role 4)*
+- Trích xuất nguyên văn 20 ca lỗi CP3 từ đề bài để thực hiện gắn nhãn độc lập theo 5 loại Google PAIR và phối hợp đối chiếu với Role 3.
+- Tổng hợp và hoàn thiện hồ sơ 1 trang `report/team/ho_so_launch_v0.md` đủ 7 mục, gắn đúng trạng thái (`Xong, có bằng chứng` / `Chưa` / `Giả lập`), đủ nhãn `simulated`, nêu rõ các con số bất lợi và đề xuất **Go có điều kiện** kèm 4 điều kiện có vai trò phụ trách và ngày kiểm tra.
+- Hoàn thiện báo cáo nhóm `report/team/group_report.md` (<= 2 trang), cập nhật `TEAM.md`, viết báo cáo cá nhân `report/team/2A202603418_TranThanhTung.md` và chạy kiểm tra toàn bộ checklist `SUBMISSION.md` (không có từ cấm, không ghi "cả đội", kiểm tra YAML và `src/lab13.py`).
 
 ### Bằng chứng
 
